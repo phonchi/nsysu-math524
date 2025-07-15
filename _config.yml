@@ -1,7 +1,7 @@
 # Site settings
 course_name: Statistical Learning and Data Mining
 course_description: "Statistical learning refers to a set of tools for modeling and understanding complex datasets. It is a recently developed area in statistics and blends with parallel developments in computer science and, in particular, machine learning. We will cover how to use machine learning techniques and statistics with the goal of statistical inference: drawing conclusions on the data at hand. This course encompasses many methods such as regression, classification, regression trees, boosting, support vector machines, clustering and dimension reduction."
-course_semester: "Fall 2023"
+course_semester: "Fall 2025"
 
 baseurl: "/nsysu-math524" # the subpath of your site, e.g. /blog/
 url: "https://phonchi.github.io" # the base hostname & protocol for your site
