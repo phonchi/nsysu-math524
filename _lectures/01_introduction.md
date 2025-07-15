@@ -1,15 +1,12 @@
 ---
 type: lecture
-date: 2023-09-11
+date: 2025-09-10
 title: Introduction
 tldr: 
 thumbnail: 
 hide_from_announcments: true
 links: 
-    - url: /static_files/presentations/01_Introduction.pdf
-      name: Slides
-    - url: /static_files/presentations/Data.zip
-      name: Dataset
+
 ---
 **Suggested Readings:**
 - [Lab](https://github.com/phonchi/ISLP_labs/blob/main/Ch01-lab.ipynb)
