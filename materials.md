@@ -73,7 +73,8 @@ permalink: /materials/
 * [Seaborn](https://seaborn.pydata.org/index.html)
 * [Yellowbrick](https://github.com/DistrictDataLabs/yellowbrick)
 
-### Modeling
+### Modeling and statistics
 * [Scikit-learn](https://scikit-learn.org/stable/)
+* [pingouin](https://pingouin-stats.org/build/html/index.html)
 * [statsmodels](https://www.statsmodels.org/stable/index.html)
 * [mlxtend](https://rasbt.github.io/mlxtend/)
