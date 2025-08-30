@@ -34,6 +34,9 @@ permalink: /materials/
 * [Kaggle](https://www.kaggle.com/datasets)
 * [Google dataset search](https://datasetsearch.research.google.com/)
 
+### Learning to use GenAI
+* [資料科學的基礎工具](https://github.com/phonchi/Fundamental-tools-for-data-science)
+
 ### Learning Statistics
 * [Seeing theory](https://seeing-theory.brown.edu/#firstPage)
 * [OpenIntro Statistics](https://www.openintro.org/book/os/)
@@ -46,7 +49,6 @@ permalink: /materials/
 * [Kaggle Python tutorial](https://www.kaggle.com/learn/python)
 * [Computer Programming in NSYSU MATH](https://phonchi.github.io/Computer_Programming/)
 * [Python for everybody](https://www.py4e.com/)
-
 
 ### Learning Python libraries
 * [Python scientific computing](https://scipy-lectures.org/)
