@@ -8,6 +8,6 @@ Join our [Facebook Group](https://www.facebook.com/groups/751826324288500) to di
 
 Office hours: Mon. 16:00-18:00 and Wed. 16:00-18:00
 
-TA hour: 
+TA hour: Thur. 17:00-18:00
 
 
