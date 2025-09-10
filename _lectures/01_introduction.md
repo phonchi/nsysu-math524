@@ -16,5 +16,5 @@ links:
 - ISLP Chapter 1
 - [PSDS Chapter 1](https://github.com/gedeck/practical-statistics-for-data-scientists/blob/master/python/notebooks/Chapter%201%20-%20Exploratory%20Data%20Analysis.ipynb)
 - [Top 10 Ideas in Statistics That Have Powered the AI Revolution](https://statmodeling.stat.columbia.edu/2021/07/07/top-10-ideas-in-statistics-that-have-powered-the-ai-revolution/)
-
+- [Recorded video](https://www.youtube.com/playlist?list=PLHNZtBNWQ-85VI_x3duODyfYm4r3pOl3e)
 
