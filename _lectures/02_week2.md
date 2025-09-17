@@ -15,4 +15,4 @@ links:
 - ISLP Chapter 2
 - ESL Chapter 2
 - [Foundations of Data Science](https://www.cs.cornell.edu/jeh/book%20no%20so;utions%20March%202019.pdf) Chapter 2
-
+- [Recorded video](https://www.youtube.com/playlist?list=PLHNZtBNWQ-87OBZ1ggt-ZMj3gK2LfUufD)
