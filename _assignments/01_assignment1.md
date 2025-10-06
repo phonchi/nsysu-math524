@@ -7,7 +7,7 @@ attachment:
 due_event: 
     type: due
     date: 2025-10-20T23:59:00
-    description: 'Assignment #2 due'
+    description: 'Assignment #1 due'
 description: '本週題目一共十題。<br>
 為 An Introduction to Statistical Learning with Applications in Python 課本<br>
 範圍為第一章和第二章'
