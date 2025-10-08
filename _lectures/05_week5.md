@@ -15,4 +15,4 @@ links:
 - ISLR Chapter 5
 - ESL Chapter 7.1-7.4 and 7.10-7.11
 - PSDS Chapter 3
-
+- [Recorded video](https://www.youtube.com/playlist?list=PLHNZtBNWQ-84VdV4eQXOMacVAIF065luN)
