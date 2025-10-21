@@ -6,7 +6,8 @@ tldr:
 thumbnail: 
 hide_from_announcments: true
 links: 
-
+    - url: /static_files/presentations/01-06_Recap.pdf
+      name: Slides
 
 ---
 **Suggested Readings:**
