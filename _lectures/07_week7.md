@@ -12,7 +12,7 @@ links:
 ---
 **Suggested Readings:**
 - [Example midterm reference](https://drive.google.com/drive/folders/1dEy4T7IFHbxq8v0g0ViBWZKRbxPbUF98?usp=sharing)
-
+- [Recorded video](https://www.youtube.com/playlist?list=PLHNZtBNWQ-84ShzrW1CkNCPZ1ehJYcCFD)
 
 
 
