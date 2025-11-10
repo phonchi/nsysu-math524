@@ -1,0 +1,17 @@
+---
+type: lecture
+date: 2025-11-19
+title: Tree-Based methods
+tldr: 
+thumbnail: 
+hide_from_announcments: true
+links: 
+    - url: /static_files/presentations/08_Tree-Based_Methods.pdf
+      name: Slides
+
+---
+**Suggested Readings:**
+- [Lab](https://github.com/phonchi/nsysu-math524/blob/main/static_files/presentations/Ch08-baggboost-lab-zh.ipynb)
+- ISLR Chapter 8
+- ESL Chapter 9
+- PSDS Chapter 6
