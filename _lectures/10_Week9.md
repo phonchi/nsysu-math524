@@ -13,5 +13,5 @@ links:
 **Suggested Readings:**
 - [Lab](https://github.com/phonchi/nsysu-math524/blob/main/static_files/presentations/Ch08-baggboost-lab-zh.ipynb)
 - ISLR Chapter 8
-- ESL Chapter 9
+- ESL Chapter 9.2
 - PSDS Chapter 6
