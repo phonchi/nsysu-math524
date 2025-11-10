@@ -13,7 +13,7 @@ links:
 **Suggested Readings:**
 - [Lab](https://github.com/phonchi/nsysu-math524/blob/main/static_files/presentations/Ch06-varselect-lab-zh.ipynb)
 - ISLR Chapter 6
-- ESL Chapter 7.1-7.7, Chapter3.3-3.6
+- ESL Chapter 7.1-7.7, Chapter 3.3-3.6
 - PSDS Chapter 4
 - [[Midterm 2023]](/nsysu-math524/static_files/presentations/Mid_term_2023.zip)
 - [[Midterm 2022]](/nsysu-math524/static_files/presentations/Mid_term_2022.zip)
