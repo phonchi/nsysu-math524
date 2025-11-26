@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>從硬幣拋擲到集成學習 (From Coins to Ensemble Learning)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc;
+        }
+        .math-block {
+            overflow-x: auto;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .step-card {
+            border-left: 4px solid #4f46e5;
+            background-color: #fefefe;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <!-- Navigation / Header -->
+    <header class="bg-indigo-600 text-white p-6 shadow-lg">
+        <div class="max-w-5xl mx-auto">
+            <h1 class="text-3xl font-bold mb-2">大數法則與集成學習</h1>
+            <p class="text-indigo-100 text-lg">為什麼 51% 的微小優勢在 10,000 次嘗試後會變成 97% 的絕對勝算？</p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto p-6 space-y-12">
+
+        <!-- Section 0: Problem Statement -->
+        <section class="bg-white rounded-xl shadow-md p-6 border-l-4 border-indigo-500">
+            <h2 class="text-2xl font-bold text-slate-800 mb-4">問題敘述：有偏差的硬幣</h2>
+            <div class="prose max-w-none text-slate-600 leading-relaxed">
+                <p class="mb-4">
+                    想像你有一枚稍微不公平的硬幣。它並不是完美的 50/50，而是有 <b>51% 的機率出現正面 (Heads)</b>，49% 的機率出現反面 (Tails)。
+                </p>
+                <p class="mb-4">
+                    如果你只拋擲這枚硬幣 <b>1 次</b>，你根本感覺不到這個優勢，結果幾乎是隨機的。但如果你拋擲 <b>10,000 次</b>，正面佔多數的機率將攀升至 <b>97% 以上</b>。這意味著，只要樣本數足夠大，一個微不足道的 1% 優勢就能轉化為近乎確定的勝利。
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 1: Interactive Simulator -->
+        <section class="bg-white rounded-xl shadow-md p-6 border border-slate-200">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 flex items-center">
+                <span class="bg-indigo-100 text-indigo-600 py-1 px-3 rounded-lg mr-3 font-bold">1</span>
+                互動式模擬 (常態近似法)
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Controls -->
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">單次拋擲/分類器 勝率 (Probability \(p\))</label>
+                        <input type="range" id="probInput" min="0.50" max="0.60" step="0.005" value="0.51" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+                        <div class="flex justify-between text-sm text-slate-500 mt-1">
+                            <span>0.50 (公平)</span>
+                            <span id="probValue" class="font-bold text-indigo-600 text-lg">0.51</span>
+                            <span>0.60 (強偏差)</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">拋擲次數/分類器數量 (Number \(N\))</label>
+                        <input type="range" id="nInput" min="10" max="20000" step="10" value="1000" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+                        <div class="flex justify-between text-sm text-slate-500 mt-1">
+                            <span>10</span>
+                            <span id="nValue" class="font-bold text-indigo-600 text-lg">1,000</span>
+                            <span>20,000</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100 text-center">
+                        <p class="text-sm text-indigo-800 uppercase font-semibold">計算結果 (最終獲得多數的機率)</p>
+                        <p id="resultDisplay" class="text-5xl font-bold text-indigo-600 mt-2">73.6%</p>
+                        <p class="text-xs text-slate-500 mt-2">*基於常態分佈近似計算</p>
+                    </div>
+                </div>
+
+                <!-- Visualization -->
+                <div class="relative h-64 md:h-auto bg-slate-50 rounded-lg p-2 border border-slate-100 flex items-center justify-center">
+                    <canvas id="probabilityChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Complete Mathematical Derivation -->
+        <section class="bg-white rounded-xl shadow-md p-8 border border-slate-200">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 flex items-center">
+                <span class="bg-emerald-100 text-emerald-600 py-1 px-3 rounded-lg mr-3 font-bold">2</span>
+                完整數學推導 (從假設到結論)
+            </h2>
+            
+            <div class="space-y-8 text-slate-700 leading-relaxed">
+                
+                <!-- Step 1: Assumptions -->
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900 border-b pb-2 mb-4">1. 問題定義與基本假設</h3>
+                    <div class="step-card">
+                        <p class="mb-2"><strong>符號定義：</strong></p>
+                        <ul class="list-disc pl-5 mb-4 space-y-1">
+                            <li>\( n \)：總拋擲次數（樣本數）。</li>
+                            <li>\( X_i \)：第 \( i \) 次拋擲的結果（伯努利試驗）。\( X_i=1 \) (正面/成功)，\( X_i=0 \) (反面/失敗)。</li>
+                            <li>\( p \)：單次出現正面的機率 (本例為 0.51)。</li>
+                        </ul>
+                        <p class="mb-2"><strong>關鍵假設 (I.I.D.)：</strong></p>
+                        <ul class="list-disc pl-5 space-y-1 text-sm text-slate-600">
+                            <li><strong>獨立性 (Independence)：</strong> 每一次拋擲互不影響。這是集成學習有效的關鍵。</li>
+                            <li><strong>同分佈 (Identical Distribution)：</strong> 每次拋擲的機率 \( p \) 都是固定的。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Step 2: Distribution -->
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900 border-b pb-2 mb-4">2. 總和與分佈</h3>
+                    <p class="mb-3">我們關心的是出現正面的<strong>總次數</strong> \( S_n \)。它服從<strong>二項分佈 (Binomial Distribution)</strong>：</p>
+                    <div class="math-block text-center text-lg">
+                        $$ S_n = \sum_{i=1}^{n} X_i \sim B(n, p) $$
+                    </div>
+                    <p class="mb-2">該分佈的期望值與變異數為：</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>期望值 (Mean):</strong> \( \mu = n \cdot p \) <span class="text-sm text-gray-500">(訊號隨 \(n\) 線性增長)</span></li>
+                        <li><strong>標準差 (Std Dev):</strong> \( \sigma = \sqrt{n \cdot p \cdot (1-p)} \) <span class="text-sm text-gray-500">(雜訊僅隨 \(\sqrt{n}\) 增長)</span></li>
+                    </ul>
+                </div>
+
+                <!-- Step 3: CLT -->
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900 border-b pb-2 mb-4">3. 中央極限定理 (CLT) 與常態近似</h3>
+                    <p class="mb-3">當 \( n \) 足夠大時，二項分佈可以被<strong>常態分佈</strong>近似：</p>
+                    <div class="math-block text-center text-lg">
+                        $$ S_n \approx N(np, \ np(1-p)) $$
+                    </div>
+                    <p class="text-sm text-slate-500">這使我們能使用標準常態分佈表 (Z-Table) 來計算機率，避免了計算數千項階乘的繁瑣。</p>
+                </div>
+
+                <!-- Step 4: The Calculation -->
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900 border-b pb-2 mb-4">4. 計算多數決勝率 (以 n=10,000 為例)</h3>
+                    <p class="mb-3">我們的目標是求「正面次數超過一半」的機率，即 \( P(S_n > 0.5n) \)。我們先計算 <strong>Z 分數 (Z-Score)</strong>：</p>
+                    
+                    <div class="math-block">
+                        $$ Z = \frac{\text{目標值} - \text{平均值}}{\text{標準差}} = \frac{0.5n - np}{\sqrt{np(1-p)}} = \sqrt{n} \cdot \frac{0.5 - p}{\sqrt{p(1-p)}} $$
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        <div class="bg-slate-50 p-4 rounded border">
+                            <h4 class="font-bold text-indigo-700 mb-2">案例 A: n = 1,000</h4>
+                            <p class="text-sm mb-2">\( Z \approx \sqrt{1000} \cdot \frac{-0.01}{0.5} \approx -0.63 \)</p>
+                            <p class="text-sm">查表得 \( P(Z > -0.63) \approx \) <strong>73.6%</strong></p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded border">
+                            <h4 class="font-bold text-indigo-700 mb-2">案例 B: n = 10,000</h4>
+                            <p class="text-sm mb-2">\( Z \approx \sqrt{10000} \cdot \frac{-0.01}{0.5} = 100 \cdot (-0.02) = -2.0 \)</p>
+                            <p class="text-sm">查表得 \( P(Z > -2.0) \approx \) <strong>97.7%</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conclusion -->
+                <div class="bg-indigo-50 p-4 rounded border-l-4 border-indigo-600">
+                    <h3 class="font-bold text-indigo-900 mb-2">數學結論</h3>
+                    <p class="text-indigo-800">
+                        Z 分數公式中的 \( \sqrt{n} \) 係數是關鍵。隨著樣本數增加，分佈曲線相對於平均值的寬度變窄，導致整個曲線迅速移動到 50% 分界線的右側（勝側）。
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section 3: Connection to Machine Learning -->
+        <section class="bg-white rounded-xl shadow-md p-6 border border-slate-200">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 flex items-center">
+                <span class="bg-amber-100 text-amber-600 py-1 px-3 rounded-lg mr-3 font-bold">3</span>
+                集成學習 (Ensemble Learning) 的應用
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="md:col-span-2 prose max-w-none text-slate-600">
+                    <p class="mb-4">
+                        這個數學推導直接證明了<b>孔多塞陪審團定理 (Condorcet's Jury Theorem)</b>，也是現代機器學習的核心原理。
+                    </p>
+                    
+                    <h3 class="text-lg font-bold text-slate-800 mt-4">弱分類器 vs. 強分類器</h3>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>
+                            <b>弱分類器 (Weak Learner):</b> 就像那枚有 51% 偏差的硬幣。單看一個決策樹樁 (Stump) 或簡單模型，它的準確率僅比隨機猜測好一點點。
+                        </li>
+                        <li>
+                            <b>強分類器 (Strong Learner):</b> 通過集成學習（如隨機森林），我們彙總成千上萬個弱分類器的投票。只要它們滿足 <b>I.I.D. 假設</b>（彼此獨立且準確率 > 0.5），最終模型的錯誤率就會像數學推導所示，隨模型數量增加而指數級下降。
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-amber-50 rounded-lg p-4 border border-amber-100 flex flex-col items-center justify-center text-center">
+                    <div class="text-4xl mb-2">🌳 ➔ 🌲</div>
+                    <h4 class="font-bold text-amber-800">隨機森林 (Random Forest)</h4>
+                    <p class="text-xs text-amber-700 mt-2">
+                        利用 Bagging 技術創造獨立性，讓數學確保最終結果的準確性。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center p-8 text-slate-400 text-sm">
+        Generated by Gemini • Explaining the Law of Large Numbers
+    </footer>
+
+    <script>
+        // --- Math Logic: Normal Approximation ---
+        
+        // Standard Normal CDF approximation
+        function normalCDF(x) {
+            var t = 1 / (1 + .2316419 * Math.abs(x));
+            var d = .3989423 * Math.exp(-x * x / 2);
+            var prob = d * t * (.3193815 + t * (-.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274))));
+            if (x > 0) prob = 1 - prob;
+            return prob;
+        }
+
+        function calculateProbability(n, p) {
+            // Mean
+            const mu = n * p;
+            // Standard Deviation
+            const sigma = Math.sqrt(n * p * (1 - p));
+            
+            // We want probability of Heads > n/2
+            // Using Continuity Correction: P(X > n/2) -> P(X >= n/2 + 0.5)
+            // Z = (Target - Mean) / Sigma
+            const target = n / 2;
+            const z = (target - mu) / sigma;
+            
+            // We want the area to the RIGHT of the Z score (1 - CDF)
+            return 1 - normalCDF(z);
+        }
+
+        // --- Visualization Logic (Chart.js) ---
+        
+        let chartInstance = null;
+
+        function updateChart(currentN, currentP) {
+            const ctx = document.getElementById('probabilityChart').getContext('2d');
+            
+            // Generate data points for the curve
+            const labels = [10, 100, 500, 1000, 2000, 5000, 10000, 15000, 20000];
+            const dataPoints = labels.map(n => calculateProbability(n, currentP) * 100);
+
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: `勝率趨勢 (p=${currentP})`,
+                        data: dataPoints,
+                        borderColor: '#4f46e5', // Indigo 600
+                        backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                        borderWidth: 3,
+                        pointRadius: 4,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `勝率: ${context.parsed.y.toFixed(2)}%`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            min: 40,
+                            max: 100,
+                            title: { display: true, text: '獲得多數的機率 (%)' }
+                        },
+                        x: {
+                            title: { display: true, text: '拋擲次數 (N)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- DOM Handling ---
+
+        const probInput = document.getElementById('probInput');
+        const probValue = document.getElementById('probValue');
+        const nInput = document.getElementById('nInput');
+        const nValue = document.getElementById('nValue');
+        const resultDisplay = document.getElementById('resultDisplay');
+
+        function updateAll() {
+            const p = parseFloat(probInput.value);
+            const n = parseInt(nInput.value);
+
+            // Update text displays
+            probValue.textContent = p.toFixed(3);
+            nValue.textContent = n.toLocaleString();
+
+            // Calculate main result
+            const probability = calculateProbability(n, p);
+            const percent = (probability * 100).toFixed(2);
+            resultDisplay.textContent = percent + "%";
+
+            // Update Chart
+            updateChart(n, p);
+        }
+
+        // Event Listeners
+        probInput.addEventListener('input', updateAll);
+        nInput.addEventListener('input', updateAll);
+
+        // Initial Load
+        updateAll();
+
+    </script>
+</body>
+</html>
