@@ -11,4 +11,5 @@ links:
 ---
 **Notice:**
 - [Final Project](/nsysu-math524/static_files/presentations/Final_Project.pdf)
+- [Schedule for the Final Presentation](/nsysu-math524/static_files/presentations/Final_Group.pdf)
 
