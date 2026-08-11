@@ -6,6 +6,10 @@ permalink: /materials/
 
 <!---{% include image.html url="/_images/cover2.jpg" width=175 align="right" %}--->
 
+## 互動自學網站
+
+* [統計學習 × Python 互動自學網站](https://phonchi.github.io/statlearning-selfstudy/) — 依本課程講義與 ISLP 編寫的十章互動教材，每節都能動手操作、附觀念釐清 Q&A、每節 quiz 與關鍵詞彙卡。
+
 ## Book
 
 * [An Introduction to Statistical Learning with Applications in Python](https://www.statlearning.com/)
