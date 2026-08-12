@@ -4,7 +4,11 @@ instructors:
     webpage: https://math.nsysu.edu.tw/p/406-1183-263491,r2843.php?Lang=zh-tw
 
 teaching_assistants:
-  - name: 顏廷諭 (Office 理 SC 2008)
+  # TODO: 補上兩位助教的 email 與研究室
+  - name: 張朔祐 (Office 理 SC TODO)
     profile_pic: /_images/pp/avatar.png
-    webpage: mailto:bppasd1234@gmail.com
+    webpage: mailto:TODO@example.com
+  - name: 陳任泯 (Office 理 SC TODO)
+    profile_pic: /_images/pp/avatar.png
+    webpage: mailto:TODO@example.com
 
