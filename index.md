@@ -6,6 +6,6 @@ Join our [Facebook Group](https://www.facebook.com/groups/1061242396597040) to d
 
 Office hours: Mon. 16:00-18:00 and Wed. 16:00-18:00
 
-TA hour: 
+TA hour: Mon. 14:00~15:00 (SC2003-2) and Wed. 16:00~17:00 (SC2005-1)
 
 
