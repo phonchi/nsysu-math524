@@ -25,7 +25,7 @@ permalink: /materials/
 
 * [An Introduction to Statistical Learning with Applications in Python](https://www.statlearning.com/) — 本課教科書（ISLP）
 * [The Elements of Statistical Learning, Data Mining, Inference, and Prediction. Second Edition](https://web.stanford.edu/~hastie/ElemStatLearn/)
-* [Practical Statistics for Data Scientists 50+ Essential Concepts Using R and Python Second Edition](https://github.com/gedeck/practical-statistics-for-data-scientists/)
+* [Ai-Assisted Statistics for Data Scientists: 50+ Essential Concepts Using R and Python](https://github.com/gedeck/ai-assisted-statistics-for-data-scientists)
 
 ### Reference solutions
 
