@@ -11,6 +11,7 @@ links:
 
 ---
 **Suggested Readings:**
+- [統計學習與資料探勘導論](https://phonchi.github.io/statlearning-selfstudy/introduction.html)
 - [Lab](https://github.com/phonchi/nsysu-math524/blob/main/static_files/presentations/Ch01-lab-zh.ipynb)
 - [Dataset description](https://islp.readthedocs.io/en/latest/data.html)
 - ISLP Chapter 1
