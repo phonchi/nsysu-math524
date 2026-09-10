@@ -17,4 +17,4 @@ links:
 - ISLP Chapter 1
 - [PSDS Chapter 1](https://gedeck.github.io/ai-assisted-statistics-for-data-scientists/docs/python/ch01.html)
 - [Top 10 Ideas in Statistics That Have Powered the AI Revolution](https://statmodeling.stat.columbia.edu/2021/07/07/top-10-ideas-in-statistics-that-have-powered-the-ai-revolution/)
-
+- [[Recorded video]](https://www.youtube.com/playlist?list=PLM37wbEIt77U)
