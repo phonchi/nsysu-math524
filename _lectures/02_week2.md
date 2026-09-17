@@ -11,6 +11,7 @@ links:
 
 ---
 **Suggested Readings:**
+- [統計學習的基本框架](https://phonchi.github.io/statlearning-selfstudy/statistical_learning.html)
 - [Lab](https://github.com/phonchi/nsysu-math524/blob/main/static_files/presentations/Ch02-statlearn-lab-zh.ipynb)
 - ISLP Chapter 2
 - ESL Chapter 2
