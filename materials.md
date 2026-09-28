@@ -55,7 +55,7 @@ permalink: /materials/
 * [Google dataset search](https://datasetsearch.research.google.com/)
 
 ### 統計基礎
-* [Seeing theory](https://seeing-theory.brown.edu/#firstPage)
+* [統計先備知識（互動自學教材）](https://phonchi.github.io/statlearning-selfstudy/)
 * [OpenIntro Statistics](https://www.openintro.org/book/os/)
 * [StatQuest](https://www.youtube.com/c/joshstarmer/playlists)
 * [Statistics Online](https://online.stat.psu.edu/statprogram/)
