@@ -19,3 +19,4 @@ links:
 - 統計先備自學：[分布與抽樣](https://phonchi.github.io/statlearning-selfstudy/s3_distributions.html)／[貝氏推論](https://phonchi.github.io/statlearning-selfstudy/s5_bayesian.html)
 - [StatQuest：機率分布與貝氏定理](https://www.youtube.com/watch?v=qBigTkBLU6g&list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9)
 - [3Blue1Brown：機率](https://www.3blue1brown.com/?topic=probability)
+- [[Recorded video]](https://www.youtube.com/playlist?list=PLQRwzhmUVm0A)
