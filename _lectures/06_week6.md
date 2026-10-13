@@ -21,4 +21,3 @@ links:
 - [[Midterm 2023]](/nsysu-math524/static_files/presentations/Mid_term_2023.zip)
 - [[Midterm 2022]](/nsysu-math524/static_files/presentations/Mid_term_2022.zip)
 - [[Midterm 2021]](/nsysu-math524/static_files/presentations/Mid_term_2021.zip)
-- [[Midterm 2020 (courtesy of professor Mei-Hui Guo)]](/nsysu-math524/static_files/presentations/Mid_term_2020.zip)
