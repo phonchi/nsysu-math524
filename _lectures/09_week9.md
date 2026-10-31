@@ -16,4 +16,3 @@ links:
 - ISLP Chapter 7
 - ESL Chapter 5.1~5.7, 6.1~6.3 and 9.1
 - AI-Assisted Statistics for Data Scientists（第三版）：[Chapter 4](https://gedeck.github.io/ai-assisted-statistics-for-data-scientists/docs/python/ch04.html)
-- [[Recorded video]](https://www.youtube.com/playlist?list=PLHNZtBNWQ-87lLBZoc83Gwofk8a1gkvfu)
