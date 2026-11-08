@@ -6,7 +6,6 @@
     <title>從硬幣拋擲到集成學習 (From Coins to Ensemble Learning)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         body {
@@ -60,7 +59,7 @@
         <section class="bg-white rounded-xl shadow-md p-6 border border-slate-200">
             <h2 class="text-2xl font-bold text-slate-800 mb-6 flex items-center">
                 <span class="bg-indigo-100 text-indigo-600 py-1 px-3 rounded-lg mr-3 font-bold">1</span>
-                互動式模擬 (常態近似法)
+                互動式計算 (精確二項機率)
             </h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -89,7 +88,7 @@
                     <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100 text-center">
                         <p class="text-sm text-indigo-800 uppercase font-semibold">計算結果 (最終獲得多數的機率)</p>
                         <p id="resultDisplay" class="text-5xl font-bold text-indigo-600 mt-2">73.6%</p>
-                        <p class="text-xs text-slate-500 mt-2">*基於常態分佈近似計算</p>
+                        <p class="text-xs text-slate-500 mt-2">*精確二項機率；N 為偶數時，平手以擲硬幣決定（算一半）</p>
                     </div>
                 </div>
 
@@ -172,6 +171,7 @@
                             <p class="text-sm">查表得 \( P(Z > -2.0) \approx \) <strong>97.7%</strong></p>
                         </div>
                     </div>
+                    <p class="text-sm text-slate-500 mt-4">上方計算器用的是精確二項機率。n = 1,000 時，嚴格過半是 72.6%、平手擲硬幣決定是 73.6%、平手也算贏是 74.7%；常態近似 73.6% 剛好落在中間。n = 10,000 時三者都約 97.7%。</p>
                 </div>
 
                 <!-- Conclusion -->
@@ -195,25 +195,28 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="md:col-span-2 prose max-w-none text-slate-600">
                     <p class="mb-4">
-                        這個數學推導直接證明了<b>孔多塞陪審團定理 (Condorcet's Jury Theorem)</b>，也是現代機器學習的核心原理。
+                        這個推導就是<b>孔多塞陪審團定理 (Condorcet's Jury Theorem)</b> 背後的直覺：彼此獨立、各自只比瞎猜好一點的投票者，人數愈多，多數決愈可能是對的。
                     </p>
-                    
-                    <h3 class="text-lg font-bold text-slate-800 mt-4">弱分類器 vs. 強分類器</h3>
+
+                    <h3 class="text-lg font-bold text-slate-800 mt-4">弱分類器與多數決</h3>
                     <ul class="list-disc pl-5 space-y-2">
                         <li>
-                            <b>弱分類器 (Weak Learner):</b> 就像那枚有 51% 偏差的硬幣。單看一個決策樹樁 (Stump) 或簡單模型，它的準確率僅比隨機猜測好一點點。
+                            <b>弱分類器 (Weak Learner):</b> 就像那枚 51% 的硬幣，準確率只比隨機猜測好一點點。
                         </li>
                         <li>
-                            <b>強分類器 (Strong Learner):</b> 通過集成學習（如隨機森林），我們彙總成千上萬個弱分類器的投票。只要它們滿足 <b>I.I.D. 假設</b>（彼此獨立且準確率 > 0.5），最終模型的錯誤率就會像數學推導所示，隨模型數量增加而指數級下降。
+                            <b>獨立是前提:</b> 只有在分類器<b>彼此獨立</b>、準確率都大於 0.5 時，多數決的正確率才會像上面那樣隨數量趨近 1，答錯的機率不超過 \( e^{-2n(p-1/2)^2} \)，隨 \( n \) 指數下降。實際上，用同一份資料訓練出來的模型常常錯在同樣的地方，投一千票可能跟投一票差不多。
                         </li>
                     </ul>
                 </div>
 
                 <div class="bg-amber-50 rounded-lg p-4 border border-amber-100 flex flex-col items-center justify-center text-center">
                     <div class="text-4xl mb-2">🌳 ➔ 🌲</div>
-                    <h4 class="font-bold text-amber-800">隨機森林 (Random Forest)</h4>
+                    <h4 class="font-bold text-amber-800">Bagging 與隨機森林 (Random Forest)</h4>
                     <p class="text-xs text-amber-700 mt-2">
-                        利用 Bagging 技術創造獨立性，讓數學確保最終結果的準確性。
+                        Bagging 用 bootstrap 重抽讓每棵樹看到不同的樣本，但樣本都來自<b>同一份</b>資料，樹與樹之間仍然相關，<b>並不獨立</b>。B 棵樹平均後的變異是 \( \rho\sigma^2 + \frac{1-\rho}{B}\sigma^2 \)，相關造成的 \( \rho\sigma^2 \) 不會隨樹數消失。
+                    </p>
+                    <p class="text-xs text-amber-700 mt-2">
+                        隨機森林在每次分裂只隨機抽部分變數，用來<b>降低</b>樹之間的相關。它的樹通常長得很深、各自並不弱；用很多棵弱小樹（例如 stump）逐步修正的是 boosting。
                     </p>
                 </div>
             </div>
@@ -226,31 +229,26 @@
     </footer>
 
     <script>
-        // --- Math Logic: Normal Approximation ---
-        
-        // Standard Normal CDF approximation
-        function normalCDF(x) {
-            var t = 1 / (1 + .2316419 * Math.abs(x));
-            var d = .3989423 * Math.exp(-x * x / 2);
-            var prob = d * t * (.3193815 + t * (-.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274))));
-            if (x > 0) prob = 1 - prob;
-            return prob;
-        }
+        // --- Math Logic: Exact Binomial ---
 
+        // log(k!) for k = 0..20000
+        const LOG_FACT = (() => {
+            const a = [0];
+            for (let k = 1; k <= 20000; k++) a.push(a[k - 1] + Math.log(k));
+            return a;
+        })();
+
+        // P(majority correct) for n votes, each correct with probability p, independent.
+        // Ties (even n) are broken by a fair coin, so they count as one half.
         function calculateProbability(n, p) {
-            // Mean
-            const mu = n * p;
-            // Standard Deviation
-            const sigma = Math.sqrt(n * p * (1 - p));
-            
-            // We want probability of Heads > n/2
-            // Using Continuity Correction: P(X > n/2) -> P(X >= n/2 + 0.5)
-            // Z = (Target - Mean) / Sigma
-            const target = n / 2;
-            const z = (target - mu) / sigma;
-            
-            // We want the area to the RIGHT of the Z score (1 - CDF)
-            return 1 - normalCDF(z);
+            if (p <= 0) return 0;
+            if (p >= 1) return 1;
+            const lp = Math.log(p), lq = Math.log(1 - p);
+            const pmf = k => Math.exp(LOG_FACT[n] - LOG_FACT[k] - LOG_FACT[n - k] + k * lp + (n - k) * lq);
+            let s = 0;
+            for (let k = Math.floor(n / 2) + 1; k <= n; k++) s += pmf(k);
+            if (n % 2 === 0) s += 0.5 * pmf(n / 2);
+            return Math.max(0, Math.min(1, s));
         }
 
         // --- Visualization Logic (Chart.js) ---
