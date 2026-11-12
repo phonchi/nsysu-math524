@@ -17,6 +17,8 @@ links:
 - ESL Chapter 7.1~7.7 and 3.3~3.6
 - AI-Assisted Statistics for Data Scientists（第三版）：[Chapter 4](https://gedeck.github.io/ai-assisted-statistics-for-data-scientists/docs/python/ch04.html)
 - [[Recorded video]](https://www.youtube.com/playlist?list=PLaqIlhRn4u10)
+- [[Midterm 2026 (A) Solution]](/nsysu-math524/static_files/presentations/Midterm_2026_A_sol.pdf)
+- [[Midterm 2026 (B) Solution]](/nsysu-math524/static_files/presentations/Midterm_2026_B_sol.pdf)
 - [[Midterm 2025 (A)]](/nsysu-math524/static_files/presentations/Mid_term_2025_A.zip)
 - [[Midterm 2025 (B)]](/nsysu-math524/static_files/presentations/Mid_term_2025_B.zip)
 - [[Midterm 2023]](/nsysu-math524/static_files/presentations/Mid_term_2023.zip)
